@@ -1,0 +1,31 @@
+#include <winver.h>
+
+VS_VERSION_INFO VERSIONINFO
+  FILEVERSION @LCD_MAJOR_VERSION@,@LCD_MINOR_VERSION@,@LCD_MICRO_VERSION@,BUILDNUMBER
+  PRODUCTVERSION @LCD_MAJOR_VERSION@,@LCD_MINOR_VERSION@,@LCD_MICRO_VERSION@,0
+  FILEFLAGSMASK 0
+  FILEFLAGS 0
+  FILEOS VOS__WINDOWS32
+  FILETYPE VFT_DLL
+  FILESUBTYPE VFT2_UNKNOWN
+  BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+      BLOCK "040904B0"
+      BEGIN
+	VALUE "CompanyName", "The liblcd developer community"
+	VALUE "FileDescription", "liblcd"
+	VALUE "FileVersion", "@LCD_MAJOR_VERSION@.@LCD_MINOR_VERSION@.@LCD_MICRO_VERSION@.BUILDNUMBER"
+	VALUE "InternalName", "liblcd-0.0"
+	VALUE "LegalCopyright", "Copyright (C) 2024 Fridrich Strba, other contributors"
+	VALUE "OriginalFilename", "liblcd-0.0.dll"
+	VALUE "ProductName", "liblcd"
+	VALUE "ProductVersion", "@LCD_MAJOR_VERSION@.@LCD_MINOR_VERSION@.@LCD_MICRO_VERSION@"
+      END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+      VALUE "Translation", 0x409, 1200
+    END
+  END
+

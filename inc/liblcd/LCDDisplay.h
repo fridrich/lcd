@@ -1,0 +1,39 @@
+/* -*- Mode: C++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
+/*
+ * This file is part of the liblcd project.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
+#ifndef INCLUDED_LIBLCD_LCDDISPLAY_H
+#define INCLUDED_LIBLCD_LCDDISPLAY_H
+
+#ifdef DLL_EXPORT
+#ifdef LIBLCD_BUILD
+#define LCDAPI __declspec(dllexport)
+#else
+#define LCDAPI __declspec(dllimport)
+#endif
+#else // !DLL_EXPORT
+#ifdef LIBLCD_VISIBILITY
+#define LCDAPI __attribute__((visibility("default")))
+#else
+#define LCDAPI
+#endif
+#endif
+
+namespace liblcd
+{
+
+class LCDDisplay
+{
+public:
+};
+
+} // namespace liblcd
+
+#endif // INCLUDED_LIBLCD_LCDDISPLAY_H
+
+/* vim:set shiftwidth=2 softtabstop=2 expandtab: */

@@ -10,18 +10,10 @@
 #ifndef INCLUDED_LIBLCD_LCDDISPLAY_H
 #define INCLUDED_LIBLCD_LCDDISPLAY_H
 
-#ifdef DLL_EXPORT
-#ifdef LIBLCD_BUILD
-#define LCDAPI __declspec(dllexport)
-#else
-#define LCDAPI __declspec(dllimport)
-#endif
-#else // !DLL_EXPORT
 #ifdef LIBLCD_VISIBILITY
 #define LCDAPI __attribute__((visibility("default")))
 #else
 #define LCDAPI
-#endif
 #endif
 
 namespace liblcd
@@ -30,6 +22,13 @@ namespace liblcd
 class LCDDisplay
 {
 public:
+    LCDAPI LCDDisplay();
+    LCDAPI ~LCDDisplay();
+
+    LCDAPI void write(const char *buffer);
+    LCDAPI void scroll(const char *buffer);
+private:
+    int fd;
 };
 
 } // namespace liblcd

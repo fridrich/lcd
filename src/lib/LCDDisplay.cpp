@@ -7,16 +7,57 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-#include <algorithm>
+#include <stdio.h>
+#include <fcntl.h>
+#include <string.h>
+#include <unistd.h>
+
 
 #include <liblcd/liblcd.h>
 
 #include "liblcd_utils.h"
 
-namespace liblcd
+liblcd::LCDDisplay::LCDDisplay() : fd(-1)
 {
+    fd = open("/dev/lcd", O_WRONLY);
+    if (fd == -1)
+    {
+        perror("Error opening file");
+    }
+    else
+    {
+        write("\x1b[L+");
+    }
+}
 
+liblcd::LCDDisplay::~LCDDisplay()
+{
+    if (fd != -1)
+    {
+        close(fd);
+    }
+}
 
-} // namespace liblcd
+void liblcd::LCDDisplay::write(const char *buffer)
+{
+    if (fd != -1)
+    {
+        ::write(fd, buffer, strlen(buffer));
+    }
+}
+
+void liblcd::LCDDisplay::scroll(const char *buffer)
+{
+    write(buffer);
+    usleep(0.5 * 1000000.0);
+    for (unsigned i = 0; i < strlen(buffer)+1; i++)
+    {
+        write(buffer+i);
+        write("\x1b[Lk");
+        write("\r");
+        usleep(0.4 * 1000000.0);
+    }
+    write(buffer);
+}
 
 /* vim:set shiftwidth=2 softtabstop=2 expandtab: */

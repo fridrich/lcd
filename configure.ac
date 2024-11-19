@@ -1,7 +1,7 @@
 dnl -*- Mode: Autoconf; tab-width: 4; indent-tabs-mode: nil; fill-column: 102 -*-
 # Process this file with autoconf to create configure.
 
-AC_PREREQ([2.72])
+AC_PREREQ([2.71])
 
 # ====================
 # Version informations

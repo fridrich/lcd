@@ -191,7 +191,12 @@ void liblcd::LCDDisplay::twoLines()
 
 void liblcd::LCDDisplay::gotoLineBegin()
 {
-    write("\b");
+    write("\r");
+}
+
+void liblcd::LCDDisplay::newLine()
+{
+    write("\n");
 }
 
 void liblcd::LCDDisplay::shiftCursorLeft()

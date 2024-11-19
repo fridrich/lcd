@@ -50,6 +50,8 @@ unsigned readU32Node(const char *nodeName);
 
 void sprintf(std::string &result, const char *format, ...);
 
+void utf8_to_hd44780(std::string &result);
+
 } // namespace liblcd
 
 #endif // INCLUDED_LIBLCD_UTILS_H

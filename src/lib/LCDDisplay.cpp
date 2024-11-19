@@ -39,43 +39,37 @@ liblcd::LCDDisplay::~LCDDisplay()
 
 void liblcd::LCDDisplay::write(const char *format, ...)
 {
-    if (m_fd != -1)
-    {
-        va_list args;
-        std::string result;
-        va_start(args, format);
-        sprintf(result, format, args);
-        va_end(args);
-        ::write(m_fd, result.c_str(), result.length());
-    }
+    va_list args;
+    std::string result;
+    va_start(args, format);
+    sprintf(result, format, args);
+    va_end(args);
+    _write(result);
 }
 
 void liblcd::LCDDisplay::scroll(const char *format, ...)
 {
-    if (m_fd != -1)
-    {
-        va_list args;
-        std::string result;
-        va_start(args, format);
-        sprintf(result, format, args);
-        va_end(args);
+    va_list args;
+    std::string result;
+    va_start(args, format);
+    sprintf(result, format, args);
+    va_end(args);
 
-        gotoLineBegin(); // return cursor at the beginning of the current line
-        killEOL(); // clear the line
-        ::write(m_fd, result.c_str(), result.length());
-        usleep(0.5 * 1000000.0);
-        if (m_width < result.length())
+    gotoLineBegin(); // return cursor at the beginning of the current line
+    killEOL(); // clear the line
+    _write(result);
+    usleep(0.5 * 1000000.0);
+    if (m_width < result.length())
+    {
+        for (unsigned i = 0; i < result.length()+1; i++)
         {
-            for (unsigned i = 0; i < result.length()+1; i++)
-            {
-                gotoLineBegin();
-                ::write(m_fd, result.c_str()+i, result.length()-i);
-                killEOL(); // kill the end of the line (means pad it by spaces)
-                usleep(0.4 * 1000000.0);
-            }
             gotoLineBegin();
-            ::write(m_fd, result.c_str(), result.length());
+            _write(result.substr(i));
+            killEOL(); // kill the end of the line (means pad it by spaces)
+            usleep(0.4 * 1000000.0);
         }
+        gotoLineBegin();
+        ::write(m_fd, result.c_str(), result.length());
     }
 }
 
@@ -219,6 +213,14 @@ void liblcd::LCDDisplay::gotoXY(int x, int y)
 void liblcd::LCDDisplay::gotoLastLine()
 {
     gotoXY(0, m_height-1);
+}
+
+void liblcd::LCDDisplay::_write(const std::string &str)
+{
+    if (m_fd != -1)
+    {
+        ::write(m_fd, str.c_str(), str.length());
+    }
 }
 
 /* vim:set shiftwidth=4 softtabstop=4 expandtab: */

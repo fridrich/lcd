@@ -10,6 +10,8 @@
 #ifndef INCLUDED_LIBLCD_LCDDISPLAY_H
 #define INCLUDED_LIBLCD_LCDDISPLAY_H
 
+#include <string>
+
 #ifdef LIBLCD_VISIBILITY
 #define LCDAPI __attribute__((visibility("default")))
 #else
@@ -59,6 +61,7 @@ public:
     LCDAPI void gotoLastLine();
 
 private:
+    void _write(const std::string &str);
     int m_fd;
     unsigned int m_width;
     unsigned int m_height;

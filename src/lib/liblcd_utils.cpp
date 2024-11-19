@@ -71,7 +71,7 @@ unsigned readU32Node(const char *nodeName)
     return value;
 }
 
-void sprintf(std::string &result, const char *format, ...)
+void sprintf(string &result, const char *format, ...)
 {
     va_list args;
 
@@ -99,6 +99,11 @@ void sprintf(std::string &result, const char *format, ...)
     result.append(buf);
 }
 
+void utf8_to_hd44780(string &result)
+{
+    (void)result;
 }
+
+} // namespace liblcd
 
 /* vim:set shiftwidth=4 softtabstop=4 expandtab: */

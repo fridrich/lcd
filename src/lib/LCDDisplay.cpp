@@ -67,7 +67,7 @@ liblcd::LCDDisplay::LCDDisplay() : m_fd(-1), m_width(0), m_height(0)
     }
     else
     {
-        write("\x1b[L+");
+        backlightOn();
     }
     m_width = readU32Node("/sys/devices/platform/auxdisplay/of_node/display-width-chars");
     m_height= readU32Node("/sys/devices/platform/auxdisplay/of_node/display-height-chars");
@@ -112,6 +112,141 @@ unsigned int liblcd::LCDDisplay::getWidth()
 unsigned int liblcd::LCDDisplay::getHeight()
 {
     return m_height;
+}
+
+void liblcd::LCDDisplay::displayOn()
+{
+    write("\x1b[LD");
+}
+
+void liblcd::LCDDisplay::displayOff()
+{
+    write("\x1b[Ld");
+}
+
+void liblcd::LCDDisplay::cursorOn()
+{
+    write("\x1b[LC");
+}
+
+void liblcd::LCDDisplay::cursorOff()
+{
+    write("\x1b[Lc");
+}
+
+void liblcd::LCDDisplay::blinkOn()
+{
+    write("\x1b[LB");
+}
+
+void liblcd::LCDDisplay::blinkOff()
+{
+    write("\x1b[Lb");
+}
+
+void liblcd::LCDDisplay::backlightOn()
+{
+    write("\x1b[L+");
+}
+
+void liblcd::LCDDisplay::backlightOff()
+{
+    write("\x1b[L-");
+}
+
+void liblcd::LCDDisplay::flashBacklight()
+{
+    write("\x1b[L*");
+}
+
+void liblcd::LCDDisplay::clear()
+{
+    write("\f");
+}
+
+void liblcd::LCDDisplay::back()
+{
+    write("\b");
+}
+
+void liblcd::LCDDisplay::smallFont()
+{
+    write("\x1b[Lf");
+}
+
+void liblcd::LCDDisplay::largeFont()
+{
+    write("\x1b[LF");
+}
+
+void liblcd::LCDDisplay::oneLine()
+{
+    write("\x1b[Ln");
+}
+
+void liblcd::LCDDisplay::twoLines()
+{
+    write("\x1b[LN");
+}
+
+void liblcd::LCDDisplay::gotoLineBegin()
+{
+    write("\b");
+}
+
+void liblcd::LCDDisplay::shiftCursorLeft()
+{
+    write("\x1b[Ll");
+}
+
+void liblcd::LCDDisplay::shiftCursorRight()
+{
+    write("\x1b[Lr");
+}
+
+void liblcd::LCDDisplay::shiftDisplayLeft()
+{
+    write("\x1b[LL");
+}
+
+void liblcd::LCDDisplay::shiftDisplayRight()
+{
+    write("\x1b[LR");
+}
+
+void liblcd::LCDDisplay::killEOL()
+{
+    write("\x1b[Lk");
+}
+
+void liblcd::LCDDisplay::reinit()
+{
+    write("\x1b[LI");
+}
+
+void liblcd::LCDDisplay::gotoXY(int x, int y)
+{
+    char xString[100];
+    char yString[100];
+    write("x1b[L");
+    if (x >= 0)
+    {
+        snprintf(&xString[0], 100, "%d", x);
+        write("x");
+        write(&xString[0]);
+    }
+    if (y >= 0)
+    {
+        snprintf(&yString[0], 100, "%d", y);
+        write("y");
+        write(&yString[0]);
+    }
+    write(";");
+}
+
+void liblcd::LCDDisplay::gotoLastLine()
+{
+    gotoXY(0, m_height-1);
 }
 
 /* vim:set shiftwidth=2 softtabstop=2 expandtab: */

@@ -30,6 +30,34 @@ public:
 
     LCDAPI unsigned int getWidth();
     LCDAPI unsigned int getHeight();
+
+    // Special codes
+    LCDAPI void displayOn();
+    LCDAPI void displayOff();
+    LCDAPI void cursorOn();
+    LCDAPI void cursorOff();
+    LCDAPI void blinkOn();
+    LCDAPI void blinkOff();
+    LCDAPI void backlightOn();
+    LCDAPI void backlightOff();
+    LCDAPI void flashBacklight();
+    LCDAPI void clear();
+    LCDAPI void back();
+    LCDAPI void smallFont();
+    LCDAPI void largeFont();
+    LCDAPI void oneLine();
+    LCDAPI void twoLines();
+    LCDAPI void gotoLineBegin();
+    LCDAPI void newLine();
+    LCDAPI void shiftCursorLeft();
+    LCDAPI void shiftCursorRight();
+    LCDAPI void shiftDisplayLeft();
+    LCDAPI void shiftDisplayRight();
+    LCDAPI void killEOL();
+    LCDAPI void reinit();
+    LCDAPI void gotoXY(int x, int y);
+    LCDAPI void gotoLastLine();
+
 private:
     int m_fd;
     unsigned int m_width;

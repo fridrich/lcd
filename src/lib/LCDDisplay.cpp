@@ -65,10 +65,6 @@ liblcd::LCDDisplay::LCDDisplay() : m_fd(-1), m_width(0), m_height(0)
     {
         perror("Error opening file");
     }
-    else
-    {
-        backlightOn();
-    }
     m_width = readU32Node("/sys/devices/platform/auxdisplay/of_node/display-width-chars");
     m_height= readU32Node("/sys/devices/platform/auxdisplay/of_node/display-height-chars");
     LCD_DEBUG_MSG(("Display width %u, height %u\n", m_width, m_height));

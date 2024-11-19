@@ -4,6 +4,7 @@ int main()
 {
     liblcd::LCDDisplay display = liblcd::LCDDisplay();
 
+    display.clear();
     display.backlightOn();
     display.blinkOff();
     display.gotoLastLine();

@@ -27,8 +27,13 @@ public:
 
     LCDAPI void write(const char *buffer);
     LCDAPI void scroll(const char *buffer);
+
+    LCDAPI unsigned int getWidth();
+    LCDAPI unsigned int getHeight();
 private:
-    int fd;
+    int m_fd;
+    unsigned int m_width;
+    unsigned int m_height;
 };
 
 } // namespace liblcd

@@ -42,6 +42,14 @@ void debugPrint(const char *format, ...) LCD_ATTRIBUTE_PRINTF(1, 2);
 namespace liblcd
 {
 
+bool isBigEndian();
+
+unsigned readU32(FILE *input);
+
+unsigned readU32Node(const char *nodeName);
+
+void sprintf(std::string &result, const char *format, ...);
+
 } // namespace liblcd
 
 #endif // INCLUDED_LIBLCD_UTILS_H

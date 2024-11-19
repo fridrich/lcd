@@ -97,8 +97,8 @@ void liblcd::LCDDisplay::scroll(const char *buffer)
     for (unsigned i = 0; i < strlen(buffer)+1; i++)
     {
         write(buffer+i);
-        write("\x1b[Lk"); // kill the end of the line (means pad it by spaces)
-        write("\r"); // return cursor at the beginning of the current line
+        killEOL(); // kill the end of the line (means pad it by spaces)
+        gotoXY(0,-1); // return cursor at the beginning of the current line
         usleep(0.4 * 1000000.0);
     }
     write(buffer);

@@ -59,9 +59,10 @@ void liblcd::LCDDisplay::scroll(const char *format, ...)
     killEOL(); // clear the line
     _write(result);
     usleep(0.5 * 1000000.0);
-    if (m_width < result.length())
+    int len = result.length();
+    if (m_width < len)
     {
-        for (unsigned i = 0; i < result.length()+1; i++)
+        for (unsigned i = 0; i < len+1; i++)
         {
             gotoLineBegin();
             _write(result.substr(i));
@@ -69,7 +70,7 @@ void liblcd::LCDDisplay::scroll(const char *format, ...)
             usleep(0.4 * 1000000.0);
         }
         gotoLineBegin();
-        ::write(m_fd, result.c_str(), result.length());
+        _write(result);
     }
 }
 

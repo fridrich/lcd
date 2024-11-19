@@ -17,6 +17,12 @@
 #include <memory>
 #include <string>
 
+#if defined(HAVE_FUNC_ATTRIBUTE_FORMAT)
+#  define LCD_ATTRIBUTE_PRINTF(fmt, arg) __attribute__((__format__(__printf__, fmt, arg)))
+#else
+#  define LCD_ATTRIBUTE_PRINTF(fmt, arg)
+#endif
+
 // do nothing with debug messages in a release compile
 #ifdef DEBUG
 namespace liblcd

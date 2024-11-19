@@ -1,4 +1,4 @@
-/* -*- Mode: C++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
+/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
 /*
  * This file is part of the liblcd project.
  *
@@ -296,4 +296,4 @@ void liblcd::LCDDisplay::gotoLastLine()
     gotoXY(0, m_height-1);
 }
 
-/* vim:set shiftwidth=2 softtabstop=2 expandtab: */
+/* vim:set shiftwidth=4 softtabstop=4 expandtab: */

@@ -1,4 +1,4 @@
-/* -*- Mode: C++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
+/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
 /*
  * This file is part of the liblcd project.
  *
@@ -14,4 +14,4 @@
 
 #endif // INCLUDED_LIBLCD_LIBLCD_H
 
-/* vim:set shiftwidth=2 softtabstop=2 expandtab: */
+/* vim:set shiftwidth=4 softtabstop=4 expandtab: */

@@ -88,16 +88,21 @@ void liblcd::LCDDisplay::write(const char *buffer)
 
 void liblcd::LCDDisplay::scroll(const char *buffer)
 {
+    gotoLineBegin(); // return cursor at the beginning of the current line
+    killEOL(); // clear the line
     write(buffer);
     usleep(0.5 * 1000000.0);
-    for (unsigned i = 0; i < strlen(buffer)+1 && m_width < strlen(buffer); i++)
+    if (m_width >= strlen(buffer))
     {
-        write(buffer+i);
-        killEOL(); // kill the end of the line (means pad it by spaces)
-        gotoLineBegin(); // return cursor at the beginning of the current line
-        usleep(0.4 * 1000000.0);
+        for (unsigned i = 0; i < strlen(buffer)+1 && m_width < strlen(buffer); i++)
+        {
+            gotoLineBegin();
+            write(buffer+i);
+            killEOL(); // kill the end of the line (means pad it by spaces)
+            usleep(0.4 * 1000000.0);
+        }
+        write(buffer);
     }
-    write(buffer);
 }
 
 unsigned int liblcd::LCDDisplay::getWidth()

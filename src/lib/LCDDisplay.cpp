@@ -87,7 +87,6 @@ void sprintf(std::string &result, const char *format, ...)
         workBuffer.reset(new char[bufsize]);
         buf = workBuffer.get();
     }
-    result.clear();
     result.append(buf);
 }
 
@@ -282,24 +281,12 @@ void liblcd::LCDDisplay::reinit()
 
 void liblcd::LCDDisplay::gotoXY(int x, int y)
 {
-    char xString[100];
-    char yString[100];
     std::string buffer;
     buffer.append("\x1b[L");
     if (x >= 0)
-    {
-        snprintf(&xString[0], 100, "%d", x);
-        buffer.append("x");
-        buffer.append(&xString[0]);
-        LCD_DEBUG_MSG(("X value %d, string %s\n", x, &xString[0]));
-    }
+        sprintf(buffer, "x%d", x);
     if (y >= 0)
-    {
-        snprintf(&yString[0], 100, "%d", y);
-        buffer.append("y");
-        buffer.append(&yString[0]);
-        LCD_DEBUG_MSG(("Y value %d, string %s\n", y, &yString[0]));
-    }
+        sprintf(buffer, "y%d", y);
     buffer.append(";");
     write(buffer.c_str());
 }

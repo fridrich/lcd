@@ -98,7 +98,7 @@ void liblcd::LCDDisplay::scroll(const char *buffer)
     {
         write(buffer+i);
         killEOL(); // kill the end of the line (means pad it by spaces)
-        gotoXY(0,-1); // return cursor at the beginning of the current line
+        gotoLineBegin(); // return cursor at the beginning of the current line
         usleep(0.4 * 1000000.0);
     }
     write(buffer);
@@ -233,20 +233,25 @@ void liblcd::LCDDisplay::gotoXY(int x, int y)
 {
     char xString[100];
     char yString[100];
-    write("x1b[L");
+    std::string buffer;
+    buffer.append("x1b[L");
     if (x >= 0)
     {
         snprintf(&xString[0], 100, "%d", x);
-        write("x");
-        write(&xString[0]);
+        buffer.append("x");
+        buffer.append(&xString[0]);
+        LCD_DEBUG_MSG(("X value %d, string %s\n", x, &xString[0]));
     }
     if (y >= 0)
     {
         snprintf(&yString[0], 100, "%d", y);
-        write("y");
-        write(&yString[0]);
+        buffer.append("y");
+        buffer.append(&yString[0]);
+        LCD_DEBUG_MSG(("Y value %d, string %s\n", y, &yString[0]));
     }
-    write(";");
+    buffer.append(";");
+    LCD_DEBUG_MSG(("%s\n", buffer.c_str()));
+    write(buffer.c_str());
 }
 
 void liblcd::LCDDisplay::gotoLastLine()

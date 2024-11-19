@@ -59,7 +59,7 @@ void liblcd::LCDDisplay::scroll(const char *format, ...)
     killEOL(); // clear the line
     _write(result);
     usleep(0.5 * 1000000.0);
-    int len = result.length();
+    size_t len = result.length();
     if (m_width < len)
     {
         for (unsigned i = 0; i < len+1; i++)

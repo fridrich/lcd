@@ -9,12 +9,18 @@
 
 #include <stdio.h>
 #include <fcntl.h>
+#include <stdarg.h>
 #include <string.h>
 #include <unistd.h>
 
 #include <liblcd/liblcd.h>
 
 #include "liblcd_utils.h"
+
+#define FIRST_BUF_SIZE 128
+#ifdef _MSC_VER
+#define vsnprintf _vsnprintf
+#endif
 
 namespace
 {
@@ -56,6 +62,35 @@ static unsigned readU32Node(const char *nodeName)
     return value;
 }
 
+void sprintf(std::string &result, const char *format, ...)
+{
+    va_list args;
+
+    int bufsize = FIRST_BUF_SIZE;
+    char firstBuffer[FIRST_BUF_SIZE];
+    std::unique_ptr<char[]> workBuffer;
+    char *buf = firstBuffer;
+
+    while (true)
+    {
+        va_start(args, format);
+        int outsize = vsnprintf(buf, size_t(bufsize), format, args);
+        va_end(args);
+
+        if ((outsize == -1) || (outsize == bufsize) || (outsize == bufsize - 1))
+            bufsize = bufsize * 2;
+        else if (outsize > bufsize)
+            bufsize = outsize + 2;
+        else
+            break;
+
+        workBuffer.reset(new char[bufsize]);
+        buf = workBuffer.get();
+    }
+    result.clear();
+    result.append(buf);
+}
+
 } // anonymous namespace
 
 liblcd::LCDDisplay::LCDDisplay() : m_fd(-1), m_width(0), m_height(0)
@@ -78,31 +113,45 @@ liblcd::LCDDisplay::~LCDDisplay()
     }
 }
 
-void liblcd::LCDDisplay::write(const char *buffer)
+void liblcd::LCDDisplay::write(const char *format, ...)
 {
     if (m_fd != -1)
     {
-        ::write(m_fd, buffer, strlen(buffer));
+        va_list args;
+        std::string result;
+        va_start(args, format);
+        sprintf(result, format, args);
+        va_end(args);
+        ::write(m_fd, result.c_str(), result.length());
     }
 }
 
-void liblcd::LCDDisplay::scroll(const char *buffer)
+void liblcd::LCDDisplay::scroll(const char *format, ...)
 {
-    gotoLineBegin(); // return cursor at the beginning of the current line
-    killEOL(); // clear the line
-    write(buffer);
-    usleep(0.5 * 1000000.0);
-    if (m_width < strlen(buffer))
+    if (m_fd != -1)
     {
-        for (unsigned i = 0; i < strlen(buffer)+1; i++)
+        va_list args;
+        std::string result;
+        va_start(args, format);
+        sprintf(result, format, args);
+        va_end(args);
+
+        gotoLineBegin(); // return cursor at the beginning of the current line
+        killEOL(); // clear the line
+        ::write(m_fd, result.c_str(), result.length());
+        usleep(0.5 * 1000000.0);
+        if (m_width < result.length())
         {
+            for (unsigned i = 0; i < result.length()+1; i++)
+            {
+                gotoLineBegin();
+                ::write(m_fd, result.c_str()+i, result.length()-i);
+                killEOL(); // kill the end of the line (means pad it by spaces)
+                usleep(0.4 * 1000000.0);
+            }
             gotoLineBegin();
-            write(buffer+i);
-            killEOL(); // kill the end of the line (means pad it by spaces)
-            usleep(0.4 * 1000000.0);
+            ::write(m_fd, result.c_str(), result.length());
         }
-        gotoLineBegin();
-        write(buffer);
     }
 }
 

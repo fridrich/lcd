@@ -25,8 +25,8 @@ public:
     LCDAPI LCDDisplay();
     LCDAPI ~LCDDisplay();
 
-    LCDAPI void write(const char *buffer);
-    LCDAPI void scroll(const char *buffer);
+    LCDAPI void write(const char *format, ...);
+    LCDAPI void scroll(const char *format, ...);
 
     LCDAPI unsigned int getWidth();
     LCDAPI unsigned int getHeight();

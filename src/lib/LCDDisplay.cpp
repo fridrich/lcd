@@ -234,7 +234,7 @@ void liblcd::LCDDisplay::gotoXY(int x, int y)
     char xString[100];
     char yString[100];
     std::string buffer;
-    buffer.append("x1b[L");
+    buffer.append("\x1b[L");
     if (x >= 0)
     {
         snprintf(&xString[0], 100, "%d", x);
@@ -250,7 +250,6 @@ void liblcd::LCDDisplay::gotoXY(int x, int y)
         LCD_DEBUG_MSG(("Y value %d, string %s\n", y, &yString[0]));
     }
     buffer.append(";");
-    LCD_DEBUG_MSG(("%s\n", buffer.c_str()));
     write(buffer.c_str());
 }
 

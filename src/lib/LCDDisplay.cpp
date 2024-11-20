@@ -86,117 +86,117 @@ unsigned int liblcd::LCDDisplay::getHeight()
 
 void liblcd::LCDDisplay::displayOn()
 {
-    write("\x1b[LD");
+    _write("\x1b[LD");
 }
 
 void liblcd::LCDDisplay::displayOff()
 {
-    write("\x1b[Ld");
+    _write("\x1b[Ld");
 }
 
 void liblcd::LCDDisplay::cursorOn()
 {
-    write("\x1b[LC");
+    _write("\x1b[LC");
 }
 
 void liblcd::LCDDisplay::cursorOff()
 {
-    write("\x1b[Lc");
+    _write("\x1b[Lc");
 }
 
 void liblcd::LCDDisplay::blinkOn()
 {
-    write("\x1b[LB");
+    _write("\x1b[LB");
 }
 
 void liblcd::LCDDisplay::blinkOff()
 {
-    write("\x1b[Lb");
+    _write("\x1b[Lb");
 }
 
 void liblcd::LCDDisplay::backlightOn()
 {
-    write("\x1b[L+");
+    _write("\x1b[L+");
 }
 
 void liblcd::LCDDisplay::backlightOff()
 {
-    write("\x1b[L-");
+    _write("\x1b[L-");
 }
 
 void liblcd::LCDDisplay::flashBacklight()
 {
-    write("\x1b[L*");
+    _write("\x1b[L*");
 }
 
 void liblcd::LCDDisplay::clear()
 {
-    write("\f");
+    _write("\f");
 }
 
 void liblcd::LCDDisplay::back()
 {
-    write("\b");
+    _write("\b");
 }
 
 void liblcd::LCDDisplay::smallFont()
 {
-    write("\x1b[Lf");
+    _write("\x1b[Lf");
 }
 
 void liblcd::LCDDisplay::largeFont()
 {
-    write("\x1b[LF");
+    _write("\x1b[LF");
 }
 
 void liblcd::LCDDisplay::oneLine()
 {
-    write("\x1b[Ln");
+    _write("\x1b[Ln");
 }
 
 void liblcd::LCDDisplay::twoLines()
 {
-    write("\x1b[LN");
+    _write("\x1b[LN");
 }
 
 void liblcd::LCDDisplay::gotoLineBegin()
 {
-    write("\r");
+    _write("\r");
 }
 
 void liblcd::LCDDisplay::newLine()
 {
-    write("\n");
+    _write("\n");
 }
 
 void liblcd::LCDDisplay::shiftCursorLeft()
 {
-    write("\x1b[Ll");
+    _write("\x1b[Ll");
 }
 
 void liblcd::LCDDisplay::shiftCursorRight()
 {
-    write("\x1b[Lr");
+    _write("\x1b[Lr");
 }
 
 void liblcd::LCDDisplay::shiftDisplayLeft()
 {
-    write("\x1b[LL");
+    _write("\x1b[LL");
 }
 
 void liblcd::LCDDisplay::shiftDisplayRight()
 {
-    write("\x1b[LR");
+    _write("\x1b[LR");
 }
 
 void liblcd::LCDDisplay::killEOL()
 {
-    write("\x1b[Lk");
+    _write("\x1b[Lk");
 }
 
 void liblcd::LCDDisplay::reinit()
 {
-    write("\x1b[LI");
+    _write("\x1b[LI");
 }
 
 void liblcd::LCDDisplay::gotoXY(int x, int y)

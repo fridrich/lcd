@@ -18,6 +18,8 @@ int main()
     display.backlightOn();
     display.blinkOff();
     display.scroll("Display test");
+    display.newLine();
+    display.scroll("Alexandrinenstraße Warnemünde");
     display.gotoLastLine();
     int i = 3;
     while (i--)

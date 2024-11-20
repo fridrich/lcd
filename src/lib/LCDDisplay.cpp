@@ -44,6 +44,10 @@ void liblcd::LCDDisplay::write(const char *format, ...)
     va_start(args, format);
     sprintf(result, format, args);
     va_end(args);
+
+    // convert the string to the HD44780 charset
+    utf8_to_hd44780(result);
+
     _write(result);
 }
 
@@ -54,6 +58,9 @@ void liblcd::LCDDisplay::scroll(const char *format, ...)
     va_start(args, format);
     sprintf(result, format, args);
     va_end(args);
+    
+    // convert the string to the HD44780 charset
+    utf8_to_hd44780(result);
 
     gotoLineBegin(); // return cursor at the beginning of the current line
     killEOL(); // clear the line

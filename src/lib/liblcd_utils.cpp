@@ -42,7 +42,7 @@ const std::unordered_map<uint64_t, std::string> characterMapping
     { 0xc383, "A" }, // Ã LATIN CAPITAL LETTER A WITH TILDE
     { 0xc384, "A" }, // Ä LATIN CAPITAL LETTER A WITH DIAERESIS
     { 0xc385, "A" }, // Å LATIN CAPITAL LETTER A WITH RING ABOVE
-    { 0xc386, "A" }, // Æ LATIN CAPITAL LETTER AE
+    { 0xc386, "AE" }, // Æ LATIN CAPITAL LETTER AE
     { 0xc387, "C" }, // Ç LATIN CAPITAL LETTER C WITH CEDILLA
     { 0xc388, "E" }, // È LATIN CAPITAL LETTER E WITH GRAVE
     { 0xc389, "E" }, // É LATIN CAPITAL LETTER E WITH ACUTE
@@ -66,7 +66,7 @@ const std::unordered_map<uint64_t, std::string> characterMapping
     { 0xc39b, "U" }, // Û LATIN CAPITAL LETTER U WITH CIRCUMFLEX
     { 0xc39c, "U" }, // Ü LATIN CAPITAL LETTER U WITH DIAERESIS
     { 0xc39d, "Y" }, // Ý LATIN CAPITAL LETTER Y WITH ACUTE
-    { 0xc39e, "p" }, // Þ LATIN CAPITAL LETTER THORN - somehow
+    { 0xc39e, "p" }, // Þ LATIN CAPITAL LETTER THORN
     { 0xc39f, "\xe2" }, // ß LATIN SMALL LETTER SHARP S
     { 0xc3a0, "a" }, // à LATIN SMALL LETTER A WITH GRAVE
     { 0xc3a1, "a" }, // á LATIN SMALL LETTER A WITH ACUTE
@@ -74,7 +74,7 @@ const std::unordered_map<uint64_t, std::string> characterMapping
     { 0xc3a3, "a" }, // ã LATIN SMALL LETTER A WITH TILDE
     { 0xc3a4, "\xe1" }, // ä LATIN SMALL LETTER A WITH DIAERESIS
     { 0xc3a5, "a" }, // å LATIN SMALL LETTER A WITH RING ABOVE
-    { 0xc3a6, "a" }, // æ LATIN SMALL LETTER AE
+    { 0xc3a6, "ae" }, // æ LATIN SMALL LETTER AE
     { 0xc3a7, "c" }, // ç LATIN SMALL LETTER C WITH CEDILLA
     { 0xc3a8, "e" }, // è LATIN SMALL LETTER E WITH GRAVE
     { 0xc3a9, "e" }, // é LATIN SMALL LETTER E WITH ACUTE
@@ -91,7 +91,7 @@ const std::unordered_map<uint64_t, std::string> characterMapping
     { 0xc3b4, "o" }, // ô LATIN SMALL LETTER O WITH CIRCUMFLEX
     { 0xc3b5, "o" }, // õ LATIN SMALL LETTER O WITH TILDE
     { 0xc3b6, "\xef" }, // ö LATIN SMALL LETTER O WITH DIAERESIS
-    { 0xc3b7, "\xfd" }, // ÷ DIVISION SIGN - somehow
+    { 0xc3b7, "\xfd" }, // ÷ DIVISION SIGN
     { 0xc3b8, "o" }, // ø LATIN SMALL LETTER O WITH STROKE
     { 0xc3b9, "u" }, // ù LATIN SMALL LETTER U WITH GRAVE
     { 0xc3ba, "u" }, // ú LATIN SMALL LETTER U WITH ACUTE
@@ -150,8 +150,8 @@ const std::unordered_map<uint64_t, std::string> characterMapping
     { 0xc4af, "i" }, // į LATIN SMALL LETTER I WITH OGONEK
     { 0xc4b0, "I" }, // İ LATIN CAPITAL LETTER I WITH DOT ABOVE
     { 0xc4b1, "i" }, // ı LATIN SMALL LETTER DOTLESS I
-    { 0xc4b2, "I" }, // Ĳ LATIN CAPITAL LIGATURE IJ
-    { 0xc4b3, "i" }, // ĳ LATIN SMALL LIGATURE IJ
+    { 0xc4b2, "IJ" }, // Ĳ LATIN CAPITAL LIGATURE IJ
+    { 0xc4b3, "ij" }, // ĳ LATIN SMALL LIGATURE IJ
     { 0xc4b4, "J" }, // Ĵ LATIN CAPITAL LETTER J WITH CIRCUMFLEX
     { 0xc4b5, "j" }, // ĵ LATIN SMALL LETTER J WITH CIRCUMFLEX
     { 0xc4b6, "K" }, // Ķ LATIN CAPITAL LETTER K WITH CEDILLA
@@ -182,8 +182,8 @@ const std::unordered_map<uint64_t, std::string> characterMapping
     { 0xc58f, "o" }, // ŏ LATIN SMALL LETTER O WITH BREVE
     { 0xc590, "O" }, // Ő LATIN CAPITAL LETTER O WITH DOUBLE ACUTE
     { 0xc591, "o" }, // ő LATIN SMALL LETTER O WITH DOUBLE ACUTE
-    { 0xc592, "O" }, // Œ LATIN CAPITAL LIGATURE OE
-    { 0xc593, "o" }, // œ LATIN SMALL LIGATURE OE
+    { 0xc592, "OE" }, // Œ LATIN CAPITAL LIGATURE OE
+    { 0xc593, "oe" }, // œ LATIN SMALL LIGATURE OE
     { 0xc594, "R" }, // Ŕ LATIN CAPITAL LETTER R WITH ACUTE
     { 0xc595, "r" }, // ŕ LATIN SMALL LETTER R WITH ACUTE
     { 0xc596, "R" }, // Ŗ LATIN CAPITAL LETTER R WITH CEDILLA
@@ -268,9 +268,9 @@ const std::unordered_map<uint64_t, std::string> characterMapping
     { 0xc6b4, "y" }, // ƴ LATIN SMALL LETTER Y WITH HOOK
     { 0xc6b5, "Z" }, // Ƶ LATIN CAPITAL LETTER Z WITH STROKE
     { 0xc6b6, "z" }, // ƶ LATIN SMALL LETTER Z WITH STROKE
-    { 0xc784, "D" }, // Ǆ LATIN CAPITAL LETTER DZ WITH CARON
-    { 0xc785, "D" }, // ǅ LATIN CAPITAL LETTER D WITH SMALL LETTER Z WITH CARON
-    { 0xc786, "d" }, // ǆ LATIN SMALL LETTER DZ WITH CARON
+    { 0xc784, "DZ" }, // Ǆ LATIN CAPITAL LETTER DZ WITH CARON
+    { 0xc785, "Dz" }, // ǅ LATIN CAPITAL LETTER D WITH SMALL LETTER Z WITH CARON
+    { 0xc786, "dz" }, // ǆ LATIN SMALL LETTER DZ WITH CARON
     { 0xc787, "L" }, // Ǉ LATIN CAPITAL LETTER LJ
     { 0xc788, "L" }, // ǈ LATIN CAPITAL LETTER L WITH SMALL LETTER J
     { 0xc789, "l" }, // ǉ LATIN SMALL LETTER LJ
@@ -320,8 +320,8 @@ const std::unordered_map<uint64_t, std::string> characterMapping
     { 0xc7b9, "n" }, // ǹ LATIN SMALL LETTER N WITH GRAVE
     { 0xc7ba, "A" }, // Ǻ LATIN CAPITAL LETTER A WITH RING ABOVE AND ACUTE
     { 0xc7bb, "a" }, // ǻ LATIN SMALL LETTER A WITH RING ABOVE AND ACUTE
-    { 0xc7bc, "A" }, // Ǽ LATIN CAPITAL LETTER AE WITH ACUTE
-    { 0xc7bd, "a" }, // ǽ LATIN SMALL LETTER AE WITH ACUTE
+    { 0xc7bc, "AE" }, // Ǽ LATIN CAPITAL LETTER AE WITH ACUTE
+    { 0xc7bd, "ae" }, // ǽ LATIN SMALL LETTER AE WITH ACUTE
     { 0xc7be, "O" }, // Ǿ LATIN CAPITAL LETTER O WITH STROKE AND ACUTE
     { 0xc7bf, "o" }, // ǿ LATIN SMALL LETTER O WITH STROKE AND ACUTE
     { 0xc880, "A" }, // Ȁ LATIN CAPITAL LETTER A WITH DOUBLE GRAVE
@@ -460,15 +460,15 @@ const std::unordered_map<uint64_t, std::string> characterMapping
     { 0xca9e, "k" }, // ʞ LATIN SMALL LETTER TURNED K
     { 0xca9f, "l" }, // ʟ LATIN LETTER SMALL CAPITAL L
     { 0xcaa0, "q" }, // ʠ LATIN SMALL LETTER Q WITH HOOK
-    { 0xcaa3, "d" }, // ʣ LATIN SMALL LETTER DZ DIGRAPH
-    { 0xcaa4, "d" }, // ʤ LATIN SMALL LETTER DEZH DIGRAPH
-    { 0xcaa5, "d" }, // ʥ LATIN SMALL LETTER DZ DIGRAPH WITH CURL
-    { 0xcaa6, "t" }, // ʦ LATIN SMALL LETTER TS DIGRAPH
-    { 0xcaa7, "t" }, // ʧ LATIN SMALL LETTER TESH DIGRAPH
-    { 0xcaa8, "t" }, // ʨ LATIN SMALL LETTER TC DIGRAPH WITH CURL
-    { 0xcaa9, "f" }, // ʩ LATIN SMALL LETTER FENG DIGRAPH
-    { 0xcaaa, "l" }, // ʪ LATIN SMALL LETTER LS DIGRAPH
-    { 0xcaab, "l" }, // ʫ LATIN SMALL LETTER LZ DIGRAPH
+    { 0xcaa3, "dz" }, // ʣ LATIN SMALL LETTER DZ DIGRAPH
+    { 0xcaa4, "dz" }, // ʤ LATIN SMALL LETTER DEZH DIGRAPH
+    { 0xcaa5, "dz" }, // ʥ LATIN SMALL LETTER DZ DIGRAPH WITH CURL
+    { 0xcaa6, "ts" }, // ʦ LATIN SMALL LETTER TS DIGRAPH
+    { 0xcaa7, "tf" }, // ʧ LATIN SMALL LETTER TESH DIGRAPH
+    { 0xcaa8, "tc" }, // ʨ LATIN SMALL LETTER TC DIGRAPH WITH CURL
+    { 0xcaa9, "fn" }, // ʩ LATIN SMALL LETTER FENG DIGRAPH
+    { 0xcaaa, "ls" }, // ʪ LATIN SMALL LETTER LS DIGRAPH
+    { 0xcaab, "lz" }, // ʫ LATIN SMALL LETTER LZ DIGRAPH
     { 0xcaae, "h" }, // ʮ LATIN SMALL LETTER TURNED H WITH FISHHOOK
     { 0xcaaf, "h" }, // ʯ LATIN SMALL LETTER TURNED H WITH FISHHOOK AND TAIL
     { 0xcb96, "+" }, // ˖ MODIFIER LETTER PLUS SIGN

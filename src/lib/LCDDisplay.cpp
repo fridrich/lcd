@@ -138,7 +138,7 @@ void liblcd::LCDDisplay::flashBacklight()
 
 void liblcd::LCDDisplay::clear()
 {
-    _write("\f");
+    _write("\x1b[2J");
 }
 
 void liblcd::LCDDisplay::back()

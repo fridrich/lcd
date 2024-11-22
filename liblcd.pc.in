@@ -6,6 +6,5 @@ includedir=@includedir@
 Name: liblcd-@LCD_MAJOR_VERSION@.@LCD_MINOR_VERSION@
 Description: Library to interface with LCD
 Version: @VERSION@
-Requires: librevenge-0.0
 Libs: -L${libdir} -llcd-@LCD_MAJOR_VERSION@.@LCD_MINOR_VERSION@
 Cflags: -I${includedir}/liblcd-@LCD_MAJOR_VERSION@.@LCD_MINOR_VERSION@

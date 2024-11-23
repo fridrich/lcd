@@ -24,8 +24,11 @@ liblcd::LCDDisplay::LCDDisplay() : m_fd(-1), m_width(0), m_height(0)
     {
         perror("Error opening file");
     }
-    m_width = readU32Node("/sys/devices/platform/auxdisplay/of_node/display-width-chars");
-    m_height= readU32Node("/sys/devices/platform/auxdisplay/of_node/display-height-chars");
+    else
+    {
+        m_width = readU32Node("/sys/devices/platform/auxdisplay/of_node/display-width-chars");
+        m_height= readU32Node("/sys/devices/platform/auxdisplay/of_node/display-height-chars");
+    }
     LCD_DEBUG_MSG(("Display width %u, height %u\n", m_width, m_height));
 }
 
@@ -45,6 +48,8 @@ void liblcd::LCDDisplay::write(const char *format, ...)
     sprintf(result, format, args);
     va_end(args);
 
+    LCD_DEBUG_MSG(("LCDDisplay::write %s\n", result.c_str()));
+
     // convert the string to the HD44780 charset
     utf8_to_hd44780(result);
 
@@ -58,7 +63,9 @@ void liblcd::LCDDisplay::scroll(const char *format, ...)
     va_start(args, format);
     sprintf(result, format, args);
     va_end(args);
-    
+
+    LCD_DEBUG_MSG(("LCDDisplay::scroll %s\n", result.c_str()));
+
     // convert the string to the HD44780 charset
     utf8_to_hd44780(result);
 
@@ -215,7 +222,7 @@ void liblcd::LCDDisplay::gotoXY(int x, int y)
     if (y >= 0)
         sprintf(buffer, "y%d", y);
     buffer.append(";");
-    write(buffer.c_str());
+    _write(buffer.c_str());
 }
 
 void liblcd::LCDDisplay::gotoLastLine()

@@ -571,11 +571,7 @@ void sprintf(string &result, const char *format, ...)
         workBuffer.reset(new char[bufsize]);
         buf = workBuffer.get();
     }
-    LCD_DEBUG_MSG(("sprintf (buf) %s\n", buf));
-
     result.append(buf);
-    
-    LCD_DEBUG_MSG(("sprintf (result) %s\"n", result.c_str()));
 }
 
 void utf8_to_hd44780(string &str)

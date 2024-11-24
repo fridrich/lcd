@@ -28,7 +28,7 @@ public:
     LCDAPI ~LCDDisplay();
 
     LCDAPI void write(const char *format, ...);
-    LCDAPI void scroll(const char *format, ...);
+    LCDAPI bool scroll(const char *format, ...);
 
     LCDAPI unsigned int getWidth();
     LCDAPI unsigned int getHeight();

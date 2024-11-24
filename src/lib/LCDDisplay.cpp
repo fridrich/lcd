@@ -56,7 +56,7 @@ void liblcd::LCDDisplay::write(const char *format, ...)
     _write(result);
 }
 
-void liblcd::LCDDisplay::scroll(const char *format, ...)
+bool liblcd::LCDDisplay::scroll(const char *format, ...)
 {
     va_list args;
     std::string result;
@@ -85,7 +85,9 @@ void liblcd::LCDDisplay::scroll(const char *format, ...)
         }
         gotoLineBegin();
         _write(result);
+        return true;
     }
+    return false;
 }
 
 unsigned int liblcd::LCDDisplay::getWidth()

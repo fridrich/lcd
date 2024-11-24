@@ -59,12 +59,14 @@ public:
     LCDAPI void reinit();
     LCDAPI void gotoXY(int x, int y);
     LCDAPI void gotoLastLine();
+    LCDAPI void interrupt();
 
 private:
     void _write(const std::string &str);
     int m_fd;
     unsigned int m_width;
     unsigned int m_height;
+    bool m_interrupt;
 };
 
 } // namespace liblcd

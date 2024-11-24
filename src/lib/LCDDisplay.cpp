@@ -17,7 +17,7 @@
 
 #include "liblcd_utils.h"
 
-liblcd::LCDDisplay::LCDDisplay() : m_fd(-1), m_width(0), m_height(0)
+liblcd::LCDDisplay::LCDDisplay() : m_fd(-1), m_width(0), m_height(0), m_interrupt(false)
 {
     m_fd = open("/dev/lcd", O_WRONLY);
     if (m_fd == -1)
@@ -76,7 +76,7 @@ bool liblcd::LCDDisplay::scroll(const char *format, ...)
     size_t len = result.length();
     if (m_width < len)
     {
-        for (unsigned i = 0; i < len+1; i++)
+        for (unsigned i = 0; i < len+1 && !m_interrupt; i++)
         {
             gotoLineBegin();
             _write(result.substr(i));
@@ -232,12 +232,18 @@ void liblcd::LCDDisplay::gotoLastLine()
     gotoXY(0, m_height-1);
 }
 
+void liblcd::LCDDisplay::interrupt()
+{
+    m_interrupt = true;
+}
+
 void liblcd::LCDDisplay::_write(const std::string &str)
 {
     if (m_fd != -1)
     {
         ::write(m_fd, str.c_str(), str.length());
     }
+    m_interrupt = false;
 }
 
 /* vim:set shiftwidth=4 softtabstop=4 expandtab: */

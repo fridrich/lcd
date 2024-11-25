@@ -62,6 +62,7 @@ public:
     LCDAPI void interrupt();
 
 private:
+    void _interrupt();
     void _write(const std::string &str);
     int m_fd;
     unsigned int m_width;

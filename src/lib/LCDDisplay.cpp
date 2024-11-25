@@ -12,6 +12,7 @@
 #include <stdarg.h>
 #include <string.h>
 #include <unistd.h>
+#include <thread>
 
 #include <liblcd/liblcd.h>
 
@@ -72,21 +73,26 @@ bool liblcd::LCDDisplay::scroll(const char *format, ...)
     gotoLineBegin(); // return cursor at the beginning of the current line
     killEOL(); // clear the line
     _write(result);
-    usleep(0.5 * 1000000.0);
+    usleep(0.2 * 1000000.0);
     size_t len = result.length();
-    if (m_width < len)
+    if (m_width < len && !m_interrupt)
     {
         for (unsigned i = 0; i < len+1 && !m_interrupt; i++)
         {
             gotoLineBegin();
             _write(result.substr(i));
             killEOL(); // kill the end of the line (means pad it by spaces)
-            usleep(0.4 * 1000000.0);
+            usleep(0.2 * 1000000.0);
         }
         gotoLineBegin();
-        _write(result);
+        if (!m_interrupt) {
+            _write(result);
+        }
+        killEOL();
+        m_interrupt=false;
         return true;
     }
+    m_interrupt=false;
     return false;
 }
 
@@ -234,7 +240,8 @@ void liblcd::LCDDisplay::gotoLastLine()
 
 void liblcd::LCDDisplay::interrupt()
 {
-    m_interrupt = true;
+    std::thread t(&liblcd::LCDDisplay::_interrupt, this);
+    t.detach();
 }
 
 void liblcd::LCDDisplay::_write(const std::string &str)
@@ -243,7 +250,12 @@ void liblcd::LCDDisplay::_write(const std::string &str)
     {
         ::write(m_fd, str.c_str(), str.length());
     }
-    m_interrupt = false;
+}
+
+void liblcd::LCDDisplay::_interrupt()
+{
+    m_interrupt = true;
+    std::this_thread::yield();
 }
 
 /* vim:set shiftwidth=4 softtabstop=4 expandtab: */

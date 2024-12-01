@@ -548,8 +548,14 @@ unsigned readU32Node(const char *nodeName)
 
 void sprintf(string &result, const char *format, ...)
 {
-    va_list args;
+    std::va_list args;
+    va_start(args, format);
+    _sprintf(result, format, &args);
+    va_end(args);
+}
 
+void _sprintf(string &result, const char *format, std::va_list *args)
+{
     int bufsize = FIRST_BUF_SIZE;
     char firstBuffer[FIRST_BUF_SIZE];
     std::unique_ptr<char[]> workBuffer;
@@ -557,9 +563,7 @@ void sprintf(string &result, const char *format, ...)
 
     while (true)
     {
-        va_start(args, format);
-        int outsize = vsnprintf(buf, size_t(bufsize), format, args);
-        va_end(args);
+        int outsize = vsnprintf(buf, size_t(bufsize), format, args[0]);
 
         if ((outsize == -1) || (outsize == bufsize) || (outsize == bufsize - 1))
             bufsize = bufsize * 2;

@@ -16,6 +16,7 @@
 
 #include <memory>
 #include <string>
+#include <cstdarg>
 
 #if defined(HAVE_FUNC_ATTRIBUTE_FORMAT)
 #  define LCD_ATTRIBUTE_PRINTF(fmt, arg) __attribute__((__format__(__printf__, fmt, arg)))
@@ -49,6 +50,8 @@ unsigned readU32(FILE *input);
 unsigned readU32Node(const char *nodeName);
 
 void sprintf(std::string &result, const char *format, ...);
+
+void _sprintf(std::string &result, const char *format, std::va_list *args);
 
 void utf8_to_hd44780(std::string &result);
 

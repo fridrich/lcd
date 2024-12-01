@@ -46,7 +46,7 @@ void liblcd::LCDDisplay::write(const char *format, ...)
     va_list args;
     std::string result;
     va_start(args, format);
-    sprintf(result, format, args);
+    _sprintf(result, format, &args);
     va_end(args);
 
     LCD_DEBUG_MSG(("LCDDisplay::write %s\n", result.c_str()));
@@ -62,7 +62,7 @@ bool liblcd::LCDDisplay::scroll(const char *format, ...)
     va_list args;
     std::string result;
     va_start(args, format);
-    sprintf(result, format, args);
+    _sprintf(result, format, &args);
     va_end(args);
 
     LCD_DEBUG_MSG(("LCDDisplay::scroll %s\n", result.c_str()));
@@ -85,7 +85,8 @@ bool liblcd::LCDDisplay::scroll(const char *format, ...)
             usleep(0.2 * 1000000.0);
         }
         gotoLineBegin();
-        if (!m_interrupt) {
+        if (!m_interrupt)
+        {
             _write(result);
         }
         killEOL();

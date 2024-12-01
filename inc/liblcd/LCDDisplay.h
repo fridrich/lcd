@@ -29,6 +29,7 @@ public:
 
     LCDAPI void write(const char *format, ...);
     LCDAPI bool scroll(const char *format, ...);
+    LCDAPI void interrupt();
 
     LCDAPI unsigned int getWidth();
     LCDAPI unsigned int getHeight();
@@ -59,7 +60,6 @@ public:
     LCDAPI void reinit();
     LCDAPI void gotoXY(int x, int y);
     LCDAPI void gotoLastLine();
-    LCDAPI void interrupt();
 
 private:
     void _interrupt();

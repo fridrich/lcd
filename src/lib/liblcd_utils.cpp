@@ -563,7 +563,7 @@ void _sprintf(string &result, const char *format, std::va_list *args)
 
     while (true)
     {
-        int outsize = vsnprintf(buf, size_t(bufsize), format, args[0]);
+        int outsize = vsnprintf(buf, size_t(bufsize), format, *args);
 
         if ((outsize == -1) || (outsize == bufsize) || (outsize == bufsize - 1))
             bufsize = bufsize * 2;

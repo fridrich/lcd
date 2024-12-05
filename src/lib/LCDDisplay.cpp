@@ -69,19 +69,21 @@ bool liblcd::LCDDisplay::scroll(const char *format, ...)
 
     // convert the string to the HD44780 charset
     utf8_to_hd44780(result);
+    
+    size_t len = result.length();
 
     gotoLineBegin(); // return cursor at the beginning of the current line
     killEOL(); // clear the line
     _write(result);
     usleep(0.2 * 1000000.0);
-    size_t len = result.length();
+    result.append("     ");
+    result.append(result.substr(0, m_width));
     if (m_width < len && !m_interrupt)
     {
-        for (unsigned i = 0; i < len+1 && !m_interrupt; i++)
+        for (unsigned i = 0; i < len+6 && !m_interrupt; i++)
         {
             gotoLineBegin();
             _write(result.substr(i));
-            killEOL(); // kill the end of the line (means pad it by spaces)
             usleep(0.2 * 1000000.0);
         }
         gotoLineBegin();
@@ -89,7 +91,6 @@ bool liblcd::LCDDisplay::scroll(const char *format, ...)
         {
             _write(result);
         }
-        killEOL();
         m_interrupt=false;
         return true;
     }

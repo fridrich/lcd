@@ -8,7 +8,6 @@
  */
 
 #include "liblcd_utils.h"
-#include <cstdarg>
 #include <unordered_map>
 
 #ifdef DEBUG

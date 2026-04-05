@@ -17,6 +17,7 @@
 #include <memory>
 #include <string>
 #include <cstdarg>
+#include <cstdint>
 
 #if defined(HAVE_FUNC_ATTRIBUTE_FORMAT)
 #  define LCD_ATTRIBUTE_PRINTF(fmt, arg) __attribute__((__format__(__printf__, fmt, arg)))

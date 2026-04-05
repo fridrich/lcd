@@ -69,7 +69,7 @@ bool liblcd::LCDDisplay::scroll(const char *format, ...)
 
     // convert the string to the HD44780 charset
     utf8_to_hd44780(result);
-    
+
     size_t len = result.length();
 
     gotoLineBegin(); // return cursor at the beginning of the current line
